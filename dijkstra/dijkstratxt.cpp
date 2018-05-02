@@ -99,10 +99,12 @@ for(i=0;i<vexnum;i++)
     dis[i].path = "v" + to_string(i) + "-->" + to_string(i+1);
     dis[i].value = arc[begin - 1][i];
 }
+    // ∞ ∞ 10 ∞ 30 100
     //设置起点到起点的路径为0；
     dis[begin - 1].value = 0;
     dis[begin - 1].visit = true;
-
+    // 0 ∞ 10 ∞ 30 100
+    //dis[0].visit = true
     int count = 1;
 
     while(count != vexnum)
@@ -117,9 +119,9 @@ for(i=0;i<vexnum;i++)
             {
                 min = dis[i].value;
                 temp = i;
+                // 10
             }
         }
-        //cout << temp + 1 << " " << min << endl;
         //把temp对应的顶点加入到已经找到的最短路径的集合当中
         dis[temp].visit = true;
         ++count;
@@ -129,6 +131,9 @@ for(i=0;i<vexnum;i++)
             //从而造成程序异常
             if(!dis[i].visit && arc[temp][i] != INT_MAX && (dis[temp].value + arc[temp][i]) < dis[i].value)
             {
+                //如果新得到的边的出度使得到达i的路径长度更短，那就就更新它的最短路径和长度
+                //v3最小10，出度v4. <v3,v4> = arc[2][3] = 50  . dis[2] + arc[2][3] < dis[3] =w maxint
+                // dis[3] = 10 + 50 = 60
                 dis[i].value = dis[temp].value + arc[temp][i];
                 dis[i].path = dis[temp].path +"-->v" + to_string(i+1);
             }
