@@ -139,7 +139,7 @@ void Graph_DG::Dijkstra(int begin)
         {
             //注意这里的条件arc[temp][i] != INT_MAX 必须加，不然会溢出
             //从而造成程序异常
-            if(!dis[i].visit && arc[temp][i] != INT_MAX && (dis[temp].value + arc[temp][i]))
+            if(!dis[i].visit && arc[temp][i] != INT_MAX && (dis[temp].value + arc[temp][i]) < dis[i].value)
             {
                 dis[i].value = dis[temp].value + arc[temp][i];
                 dis[i].path = dis[temp].path +"-->v" + to_string(i+1);
