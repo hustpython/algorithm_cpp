@@ -82,10 +82,34 @@ void deleteByVal(Node * head,int val)
 //清空列表
 void Free(Node * head)
 {
-    for(Node * temp = head ; temp != NULL;temp = head -> next)
+    for(Node * temp = head ; temp != NULL;temp = head)
     {
-        head = head -> next;
         free(temp);
+        head = head -> next;
+    }
+}
+
+//链表反转
+Node * Reverse (Node * head)
+{
+    if (head == NULL || head -> next == NULL)
+    {
+        return head;
+    }
+    else 
+    {
+        Node * cur = head -> next,
+             * pre = NULL,
+             * next = NULL;
+        while(cur != NULL)
+        {
+            next = cur -> next;
+            cur -> next = pre;
+            pre = cur;
+            cur = next;
+        }
+        head -> next = pre;
+        return head;
     }
 }
 int main(){
@@ -110,9 +134,9 @@ int main(){
                          //tail指向的next变了,
          //Inserthead(head,i);
     }
-    //Free(head);
-    deleteByVal(head,3);
     
+    //deleteByVal(head,3);
+    Reverse(head);
     Node *p = head ->next ;
     
     while(p!= NULL)
@@ -120,5 +144,6 @@ int main(){
         printf("% d->",p->val);
         p =  p->next;
     }
+    Free(head);
     return 0;
 }
