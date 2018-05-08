@@ -80,6 +80,31 @@ void InorderTraverse(Tree_Node * T)
         InorderTraverse(T->right);
     }
 }
+
+//中序遍历，非递归实现
+void InorderTraverse_no_recusive(Tree_Node * T)
+{
+    stack<Tree_Node *> s;
+    Tree_Node *p = T;
+    while(p || ! s.empty())
+    {
+        if(p != NULL)
+        {
+            s.push(p);
+            p = p->left;
+        }
+        else 
+        {
+            p = s.top();
+            s.pop();
+            if(p->data!='#')
+            {
+                cout << p->data << " ";
+            }
+            p = p->right;
+        }
+    }
+}
 int main()
 {
     Tree_Node *T ;
@@ -87,4 +112,5 @@ int main()
     //PreorderTraverse(T);
     PreorderTraverse_no_recursive(T);
     InorderTraverse(T);
+    InorderTraverse_no_recusive(T);
 }
