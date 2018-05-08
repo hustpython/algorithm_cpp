@@ -1,0 +1,9 @@
+malloc函数为动态分配空间；
+原型为: void * malloc(int size);
+使用方法一般为：
+假设你定义了一个名为Node的struct类型，你要定义一个名为a的Node类型的指针变量，使用以下语句：
+Node * a=（Node *）malloc(sizeof(Node))；
+其中（Node *）为强制转换，把返回类型void *转换为Node *，sizeof（Node）为获取Node类型占据
+空间的大小，如在我机子上int类型占4字节，sizeof（int）就返回4；
+
+分配一个Node类型大小的内存空间，。并把分配空间的首地址强制转换成Node *类型的。这是一个常用的做法。
