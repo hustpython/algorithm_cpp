@@ -131,29 +131,30 @@ void PostorderTraverse(Tree_Node *T)
 //左孩子和右孩子都在根结点前面被访问。
 void PostorderTraverse_no_recursive(Tree_Node * T)
 {
-    Tree_Node *pre;
+    Tree_Node *pre;//前一个被访问的节点
     pre = NULL;
     stack <Tree_Node *>s;
-    Tree_Node * cur;
-    s.push(T);
+    Tree_Node * cur;//记录栈顶的节点
+    s.push(T);//先把根节点入栈
     while(!s.empty())
     {
-        cur = s.top();
+        cur = s.top();//cur记录的是栈顶的节点
         if((cur -> left == NULL && cur->right ==NULL) || (pre != NULL && (pre == cur->left || pre == cur->right)))
         {
-            cout << cur -> data << " ";
+            cout << cur -> data << " ";//满足：不存在左孩子或右孩子；
+                                       //或 存在左孩子或右孩子，但都被访问过了。
             s.pop();
-            pre = cur;
+            pre = cur;//更新pre的值
         }
         else 
         {
             if(cur -> right != NULL)
             {
-                s.push(cur->right);
+                s.push(cur->right);//右子树先入栈
             }
             if(cur->left != NULL)
             {
-                s.push(cur->left);
+                s.push(cur->left);//左子树后入栈
             }
         }
     }
