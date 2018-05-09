@@ -82,7 +82,7 @@ void InorderTraverse(Tree_Node * T)
 }
 
 //中序遍历，非递归实现
-void InorderTraverse_no_recusive(Tree_Node * T)
+void InorderTraverse_no_recursive(Tree_Node * T)
 {
     stack<Tree_Node *> s;
     Tree_Node *p = T;
@@ -105,12 +105,80 @@ void InorderTraverse_no_recusive(Tree_Node * T)
         }
     }
 }
+
+//后序遍历，递归实现
+void PostorderTraverse(Tree_Node *T)
+{
+    if(T)
+    {
+        PostorderTraverse(T->left);
+        PostorderTraverse(T->right);
+        if(T->data != '#')
+        {
+            cout << T->data << " ";
+        }
+    }
+}
+//后序遍历，非递归实现
+//思路：我们要保证根结
+//点在左孩子和右孩子访
+//问之后才能访问，因此
+//对于任一结点P，先将其入栈。
+//如果P不存在左孩子和右孩子，则可以直接访问它；
+//或者P存在左孩子或者右孩子，但是其左孩子和右孩子都已被访问过了，
+//则同样可以直接访问该结点。若非上述两种情况，则将P的右孩子和左孩子依次入栈，
+//这样就保证了每次取栈顶元素的时候，左孩子在右孩子前面被访问，
+//左孩子和右孩子都在根结点前面被访问。
+void PostorderTraverse_no_recursive(Tree_Node * T)
+{
+    Tree_Node *pre;
+    pre = NULL;
+    stack <Tree_Node *>s;
+    Tree_Node * cur;
+    s.push(T);
+    while(!s.empty())
+    {
+        cur = s.top();
+        if((cur -> left == NULL && cur->right ==NULL) || (pre != NULL && (pre == cur->left || pre == cur->right)))
+        {
+            cout << cur -> data << " ";
+            s.pop();
+            pre = cur;
+        }
+        else 
+        {
+            if(cur -> right != NULL)
+            {
+                s.push(cur->right);
+            }
+            if(cur->left != NULL)
+            {
+                s.push(cur->left);
+            }
+        }
+    }
+
+}
 int main()
 {
     Tree_Node *T ;
     createTree(T);
-    //PreorderTraverse(T);
+    cout<<"先序遍历,递归实现:" << endl;
+    PreorderTraverse(T);
+    cout << endl;
+    cout<<"先序遍历,非递归实现:" << endl;
     PreorderTraverse_no_recursive(T);
+    cout << endl;
+    cout<<"中序遍历,递归实现:" << endl;
     InorderTraverse(T);
-    InorderTraverse_no_recusive(T);
+    cout << endl;
+    cout<<"中序遍历,非递归实现:" << endl;
+    InorderTraverse_no_recursive(T);
+    cout << endl;
+    cout<<"后序遍历,递归实现:" << endl;
+    PostorderTraverse(T);
+    cout << endl;
+    cout<<"后序遍历,非递归实现:" << endl;
+    PostorderTraverse_no_recursive(T);
+    cout << endl;
 }
