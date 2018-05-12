@@ -141,10 +141,13 @@ void PostorderTraverse_no_recursive(Tree_Node * T)
         cur = s.top();//cur记录的是栈顶的节点
         if((cur -> left == NULL && cur->right ==NULL) || (pre != NULL && (pre == cur->left || pre == cur->right)))
         {
-            cout << cur -> data << " ";//满足：不存在左孩子或右孩子；
-                                       //或 存在左孩子或右孩子，但都被访问过了。
+            cout << cur -> data << " ";//满足：不存在左孩子或右孩子；(说明其为叶子节点，
+                                       //根据入栈顺序先访问左节点然后是右节点)
+                                       //或 存在左孩子或右孩子，但都被访问过了。（说明其是子树的根，
+                                       //且他的左孩子或右孩子都已经被访问过了。符合左右根的顺序。
             s.pop();
-            pre = cur;//更新pre的值
+            pre = cur;//更新pre的值，当左右都被访问后，pre被更新到左子树或右子树。当cur为根节点时
+                      //pre == cur->left || pre == cur->right 为true
         }
         else 
         {

@@ -42,7 +42,7 @@ void select_two_min(Tree_Node * tree,int k,int &s1,int &s2)
 void Build_Huffman_Tree(Tree_Node * & tree,int *weight , int n,char *data)
 {
     if (n <= 1) return;
-    int m=2 * n - 1;
+    int m=2 * n - 1;//若叶子节点为n，则总的节点树最大 2*n - 1
     tree = new Tree_Node[m];
     int i = 0;
     Tree_Node *p = tree;
@@ -67,5 +67,25 @@ void Build_Huffman_Tree(Tree_Node * & tree,int *weight , int n,char *data)
         tree[s1].parent = tree[s2].parent = i;
         tree[i].weight = tree[s1].weight + tree[s2].weight;
     }
+
+}
+void code (char * str,int n,int * weight, char ** & huffmancode)
+{
+    Tree_Node * tree;
+    Build_Huffman_Tree(tree,weight,n,str);
+    huffmancode = new char *[n+1];
+    char *c = new char[n];
+    c[n - 1] = '\0';
+    int i;
+    int start;
+    int child;
+    int f;
+    for(i=0;i<n;++i)
+    {
+        start = n-1;
+        for(child = i;f = tree[i].parent; f != 0;child = f;f=)
+
+    }
+
 
 }
