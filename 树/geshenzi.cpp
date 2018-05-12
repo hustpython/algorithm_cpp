@@ -4,12 +4,12 @@
 using namespace std;
 
 const int INF = 100;
-int N = 4;
-int K = 11;
-double L[4] = {8.04,2.43,4.53,5.39};
+int N = 3;
+int K = 12;
+double L[3] = {6.52,2.43,4.53};
 bool c(double x)
 {
-    double num = 0;
+    int num = 0;
     for(int i=0;i<N;++i)
     {
         num += L[i] / x;
@@ -22,7 +22,7 @@ double solve()
     double lb = 0;
     double ub = INF;
     double mid = 0;
-    for (int i=0;i<30;++i)
+    for (int i=0;i<100;++i)
     {
         mid = (lb + ub) / 2;
         if (c(mid))

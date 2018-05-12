@@ -1,3 +1,4 @@
+//https://blog.csdn.net/abcjennifer/article/details/8020695
 // 最优二叉树（哈夫曼树)
 // (1)叶子节点的路径长度:从根节点到该叶子节点所经过
 //    的边的条数。
@@ -7,7 +8,8 @@
 // 然后，当我们给定的每个叶子节点的权值，我们去构造不同的二叉树，当该二叉树
 // 的WPL值最小时，我们称该二叉树为最优二叉树或哈夫曼树。
 # include <climits>
-
+# include <iostream>
+using namespace std;
 struct Tree_Node 
 {
     char data;
@@ -83,9 +85,52 @@ void code (char * str,int n,int * weight, char ** & huffmancode)
     for(i=0;i<n;++i)
     {
         start = n-1;
-        for(child = i;f = tree[i].parent; f != 0;child = f;f=)
+        for(child = i,f = tree[i].parent; f != 0;
+            child = f,f=tree[f].parent)
+        {
+            if(tree[f].left == child)
+            {
+                c[--start] = '0';
+            }
+            else 
+            {
+                c[--start] = '1';
+            }
 
+        }
+        huffmancode[i] = new char[n- start -1];
+        int p = start;
+        for (int k=0;p<n;k++,p++)
+        {
+            huffmancode[i][k] = c[p];
+        }
     }
+}
 
+int main()
+{
+    char *str;
+    int n;
+    int * weight;
+    char ** huffmancode;
+    cout << "输入字符种类:" << endl;
+    cin >> n;
+    str = new char[n];
+    weight = new int[n];
+    cout << "输入每个字符对应的权重" << endl;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        cin >> str[i];
+        cin >> weight[i];
+    }
+    code(str,n,weight,huffmancode);
+    cout << "每个字符编码后的值:" << endl;
+    for (i=0;i<n;i++)
+    {
+        cout << str[i] << ":" << huffmancode[i] << endl;
+    }
+    cout << endl;
+    return 0;
 
 }
