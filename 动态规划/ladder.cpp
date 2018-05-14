@@ -26,6 +26,7 @@ int ladder_mapsearch(int num,map<int,int> &cmap)
 //备忘录算法
 //使用递归会重复计算，可以通过map将计算过的节点保存
 //在每次计算之前进行查询。
+//时间复杂度和空间复杂度都是 O(n)
 {
     if (num == 1)
     {
@@ -50,6 +51,7 @@ int ladder_mapsearch(int num,map<int,int> &cmap)
     
 }
 //方法三：从底向上
+//时间复杂度为O(n)，空间复杂度为O(1)
 int ladder_downtoup(int num)
 {
     int a = 1;
