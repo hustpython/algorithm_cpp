@@ -5,7 +5,7 @@ using namespace std;
 // 有20层的梯子，上楼时可以一次走一步或一次走两步。
 // 请问，一共有多少上楼方式。
 
-//动态规划 O(2^n)
+//方法一：简单递归 O(2^n)
 int ladderres(int num)
 {
 
@@ -23,7 +23,7 @@ int ladderres(int num)
     }
 }
 int ladder_mapsearch(int num,map<int,int> &cmap)
-//备忘录算法
+//方法二：备忘录算法
 //使用递归会重复计算，可以通过map将计算过的节点保存
 //在每次计算之前进行查询。
 //时间复杂度和空间复杂度都是 O(n)
@@ -50,8 +50,8 @@ int ladder_mapsearch(int num,map<int,int> &cmap)
     
     
 }
-//方法三：从底向上
-//时间复杂度为O(n)，空间复杂度为O(1)
+//方法三：动态规划
+//从底向上，时间复杂度为O(n)，空间复杂度为O(1)
 int ladder_downtoup(int num)
 {
     int a = 1;
