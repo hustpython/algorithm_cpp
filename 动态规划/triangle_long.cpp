@@ -35,6 +35,7 @@ using namespace std;
 int n;
 int D[Max][Max];
 //简单递归
+//从塔顶到基座的递归,边界是遍历到底座的元素
 //res = max(x,y) + D[i][j]
 //边界条件是递归到三角形最后一层
 //max(sum(2.1),sum(2.2))+D[1.1]
@@ -82,6 +83,41 @@ int memory_triangle(int i,int j)
     
 
 }
+//动态规划,递归到递推
+//从底座到塔尖
+int dymax[Max][Max];
+int ditui_triangle()
+{
+    
+    for(int k=1;k<=n;++k)
+    {
+        dymax[n][k] = D[n][k];
+    }
+    for(int i = n-1;i>=1;--i)
+    {
+        for(int j = 1;j<=i;++j)
+        {
+            dymax[i][j] = max(dymax[i+1][j],dymax[i+1][j+1]) + D[i][j];
+        }
+    }
+    return dymax[1][1];
+    
+}
+
+int *dymax_one;
+int ditui_triangle_oned()
+{
+    
+    dymax_one = D[n];
+    for(int i = n-1;i>=1;--i)
+    {
+        for(int j = 1;j<=i;++j)
+        {
+            dymax_one[j] = max(dymax_one[j],dymax_one[j+1]) + D[i][j];
+        }
+    }
+    return dymax_one[1];  
+}
 int main()
 {
     ifstream input("triangle_input.txt");
@@ -97,5 +133,7 @@ int main()
     
     input.close();
     //cout << triangle_summax(1,1)<<endl;
-    cout << memory_triangle(1,1)<<endl;
+    //cout << memory_triangle(1,1)<<endl;
+    //cout << ditui_triangle() <<endl;
+    cout << ditui_triangle_oned() <<endl;
 }

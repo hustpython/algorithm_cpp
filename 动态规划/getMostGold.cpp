@@ -29,6 +29,16 @@ using namespace std;
 //时间复杂度 O(2^n)
 //空间复杂度 O(n)
 //还没写出来
+// int triangle_summax(int i,int j)
+// {
+//     if(i == n)
+//     {
+//         return D[i][j];
+//     }
+//     int x = triangle_summax(i+1,j);
+//     int y = triangle_summax(i+1,j+1);
+//     return max(x,y) + D[i][j];
+// }
 int recusive_Gold(int n,int w,int g[],int p[])
 {
     if(n == 0)
