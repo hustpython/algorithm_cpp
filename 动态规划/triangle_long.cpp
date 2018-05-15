@@ -34,6 +34,20 @@ using namespace std;
 # define Max 101
 int n;
 int D[Max][Max];
+//简单递归
+//res = max(x,y) + D[i][j]
+//边界条件是递归到三角形最后一层
+//max(sum(2.1),sum(2.2))+D[1.1]
+//sum(2.1) = max(sum(3.1),sum(3.2))+D[2.1]
+//sum(3.1) = max(sum(4.1),sum(4.2))+D[3.1]
+//sum(3.2) = max(sum(4.2),sum(4.3))+D[3.2]
+//sum(4.1) = D[4.1] = 2;sum(4.2) = D[4.2] = 7;sum(4.3) = D[4.3] = 4
+//sum(3.1) = 7+D[3.1] = 7 + 8 =15;
+//sum(3.2) = 7 + 1 = 8;
+//sum(2.1) = 15 + 3 = 18;
+//////////////////////////////////////////
+//同理可以求得sum(2.2) = 8+8 = 16
+//sum(1.1) = 18 + D[1.1] = 18 + 7 = 25;
 
 int triangle_summax(int i,int j)
 {
@@ -43,10 +57,31 @@ int triangle_summax(int i,int j)
     }
     int x = triangle_summax(i+1,j);
     int y = triangle_summax(i+1,j+1);
-    cout << x<<'l'<<y<<'j'<<max(x,y)<<'s'<<D[i][j]<<endl;
     return max(x,y) + D[i][j];
 }
+//备忘录法
+int memory[Max][Max];
+int memory_triangle(int i,int j)
+{
+    if(memory[i][j] != -1)
+    {
+        return memory[i][j];
+    }
+    if(i == n)
+    {
+        memory[i][j] = D[i][j];
+    }
+    else
+    {
+        int x = triangle_summax(i+1,j);
+        int y = triangle_summax(i+1,j+1);
+        memory[i][j] = max(x,y) + D[i][j];
+    }
+    return memory[i][j];
 
+    
+
+}
 int main()
 {
     ifstream input("triangle_input.txt");
@@ -56,8 +91,11 @@ int main()
         for(int j=1;j<=i;++j)
         {
             input>>D[i][j];
+            memory[i][j] = -1;
         }
     }
+    
     input.close();
-    cout << triangle_summax(1,1)<<endl;
+    //cout << triangle_summax(1,1)<<endl;
+    cout << memory_triangle(1,1)<<endl;
 }
