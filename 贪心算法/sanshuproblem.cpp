@@ -1,9 +1,16 @@
 #include <stdio.h>
+# include<iostream>
 #include <stdlib.h>
 #include <string.h>
-//5934625578
-//6
-//2557
+using namespace std;
+//test:
+//m:5934625578
+//b:6
+//out:2557
+//这是一道类贪心问题，此题的思路是每次删掉的数字，
+//为第一个递减的数字，这样才能保证最后剩余的字符串代表的数字最小。
+//贪心算法。按照高位到低位的顺序搜索，若各位数字递增，
+//则删除最后一个数字；否则删除第一个递减区间的首字符，然后回到串首，再重复删除.
 int main()
 {
     int a, b, len, n;
@@ -15,7 +22,11 @@ int main()
             a = 0;
             len = strlen(m);
             while(a<len&&m[a]<=m[a+1])//寻找第一个递减的数字
+            {
                 a++;
+            }
+            //printf("%d%d\n",m[a],m[a+1]);
+            //cout << m[a] << endl; //分析每次删数的数字
             while(a<len)//找到后，将其后的字符向前移动一位（相当于删掉）
             {
                 m[a] = m[a+1];
