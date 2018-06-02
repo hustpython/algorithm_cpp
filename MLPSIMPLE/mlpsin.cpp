@@ -52,13 +52,14 @@ int main() {
 	//	V[i] = 0.1 * rand() / RAND_MAX;
 	//	c[i] = 0.1 * rand() / RAND_MAX;
 	//}
+	//取得0-1之间的浮点数：rand()/double(RAND_MAX)
 
 	srand(time(NULL));
 	for (int i = 0; i < N; i++) {
 		W[i] = 2 * rand() / RAND_MAX - 1;
 		V[i] = 2 * rand() / RAND_MAX - 1;
 		c[i] = 2 * rand() / RAND_MAX - 1;
-	}
+	}fflush
 
 	//for (int i = 0; i < N; i++) {
 	//	W[i] = 0;
