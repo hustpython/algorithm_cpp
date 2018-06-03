@@ -97,7 +97,7 @@ int DFS(int n)
         sign = true;
         return 0;
     }
-    if(board[n/9][n%9] != '\0')
+    if(board[n/9][n%9] != 0)
     {
         DFS(n+1);
     }
