@@ -94,8 +94,8 @@ def deselect(X, Y, r, cols):
                     X[k].add(i)
 
 if __name__ == "__main__":
-    #import doctest
-    #doctest.testmod()
+    # import doctest
+    # doctest.testmod(verbose=True)
     grid = [
          [5, 3, 0, 0, 7, 0, 0, 0, 0],
          [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -108,5 +108,6 @@ if __name__ == "__main__":
          [0, 0, 0, 0, 8, 0, 0, 7, 9]]
     size = (3,3)
     res = solve_sudoku(size,grid)
-    g = res.__next__()
-    print(g)
+    #print(res.__next__())
+    print(*res,sep = "\\n")
+    
